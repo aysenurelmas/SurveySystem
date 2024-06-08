@@ -2,9 +2,9 @@
 
 namespace Entities.Concretes;
 
-public class Question : Entity<Guid>
+public class Question : Entity<int>
 {
-    public Guid SurveyId { get; set; }
+    public int SurveyId { get; set; }
     public string QuestionText { get; set; }
 
     public virtual Survey Survey { get; set; }

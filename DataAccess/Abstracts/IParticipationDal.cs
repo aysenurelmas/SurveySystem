@@ -1,6 +1,9 @@
-﻿namespace DataAccess.Abstracts;
+﻿using Core.DataAccess.Repositories;
+using Entities.Concretes;
 
-public interface IParticipationDal
+namespace DataAccess.Abstracts;
+
+public interface IParticipationDal : IRepository<Participation, int>, IAsyncRepository<Participation, int>
 {
 
 }

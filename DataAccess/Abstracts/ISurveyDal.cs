@@ -1,6 +1,9 @@
-﻿namespace DataAccess.Abstracts;
+﻿using Core.DataAccess.Repositories;
+using Entities.Concretes;
 
-public interface ISurveyDal
+namespace DataAccess.Abstracts;
+
+public interface ISurveyDal : IRepository<Survey, int> , IAsyncRepository<Survey, int>
 {
 
 }

@@ -2,7 +2,7 @@
 
 namespace Entities.Concretes;
 
-public class Survey : Entity<Guid>
+public class Survey : Entity<int>
 {
     public string Name { get; set; }
 

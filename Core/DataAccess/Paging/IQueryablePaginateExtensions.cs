@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.DataAccess.Paging;
-
 public static class IQueryablePaginateExtensions
 {
     public static async Task<Paginate<T>> ToPaginateAsync<T>(

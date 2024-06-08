@@ -1,6 +1,9 @@
-﻿namespace DataAccess.Abstracts;
+﻿using Core.DataAccess.Repositories;
+using Entities.Concretes;
 
-public interface IQuestionDal
+namespace DataAccess.Abstracts;
+
+public interface IQuestionDal : IRepository<Question, int>, IAsyncRepository<Question, int>
 {
 
 }

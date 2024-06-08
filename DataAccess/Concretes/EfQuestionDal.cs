@@ -1,6 +1,13 @@
-﻿namespace DataAccess.Concretes;
+﻿using Core.DataAccess.Repositories;
+using DataAccess.Abstracts;
+using DataAccess.Contexts;
+using Entities.Concretes;
 
-public class EfQuestionDal
+namespace DataAccess.Concretes;
+
+public class EfQuestionDal : EfRepositoryBase<Question, int, BaseDbContext>, IQuestionDal
 {
-
+    public EfQuestionDal(BaseDbContext context) : base(context)
+    {
+    }
 }
