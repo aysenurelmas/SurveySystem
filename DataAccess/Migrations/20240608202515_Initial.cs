@@ -144,6 +144,7 @@ namespace DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     SurveyId = table.Column<int>(type: "int", nullable: false),
+                    Answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -223,50 +224,10 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Answers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ParticipationId = table.Column<int>(type: "int", nullable: false),
-                    QuestionId = table.Column<int>(type: "int", nullable: false),
-                    AnswerText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Answers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Answers_Participations_ParticipationId",
-                        column: x => x.ParticipationId,
-                        principalTable: "Participations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Answers_Questions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Questions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "Status", "UpdatedDate" },
-                values: new object[] { 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@admin.com", "Admin", "NArchitecture", new byte[] { 113, 110, 234, 196, 192, 185, 115, 140, 212, 1, 8, 45, 197, 207, 172, 184, 69, 28, 142, 83, 182, 108, 132, 247, 141, 206, 17, 50, 36, 191, 138, 9, 108, 123, 23, 14, 11, 105, 147, 220, 49, 147, 27, 125, 235, 22, 221, 67, 34, 107, 91, 243, 95, 217, 144, 197, 145, 176, 11, 155, 161, 0, 61, 100 }, new byte[] { 194, 187, 144, 180, 19, 205, 196, 84, 197, 2, 148, 150, 5, 100, 186, 119, 175, 96, 155, 205, 194, 94, 10, 22, 36, 250, 165, 166, 163, 65, 103, 1, 134, 138, 29, 174, 39, 178, 157, 115, 11, 77, 146, 255, 235, 180, 215, 65, 100, 175, 182, 15, 243, 23, 242, 64, 168, 158, 52, 47, 129, 169, 194, 107, 253, 89, 197, 52, 188, 232, 229, 228, 40, 159, 215, 119, 63, 172, 89, 226, 67, 238, 19, 219, 247, 207, 155, 117, 2, 116, 243, 209, 129, 158, 209, 106, 140, 18, 183, 140, 134, 122, 155, 77, 192, 221, 111, 181, 227, 80, 84, 117, 5, 139, 232, 205, 156, 15, 35, 56, 81, 169, 24, 121, 133, 50, 230, 175 }, true, null });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Answers_ParticipationId",
-                table: "Answers",
-                column: "ParticipationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Answers_QuestionId",
-                table: "Answers",
-                column: "QuestionId");
+                values: new object[] { 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@admin.com", "Admin", "NArchitecture", new byte[] { 43, 250, 248, 68, 160, 81, 23, 209, 195, 135, 186, 203, 143, 11, 75, 247, 35, 216, 186, 214, 204, 85, 60, 192, 145, 220, 169, 191, 89, 174, 240, 109, 131, 196, 200, 158, 192, 84, 215, 166, 214, 144, 192, 209, 190, 210, 250, 169, 206, 209, 136, 172, 35, 229, 95, 127, 159, 122, 12, 95, 188, 228, 155, 217 }, new byte[] { 239, 151, 108, 10, 76, 71, 230, 43, 87, 61, 90, 205, 13, 53, 205, 120, 161, 208, 6, 155, 90, 21, 93, 248, 108, 248, 38, 155, 54, 111, 187, 218, 40, 39, 157, 201, 69, 242, 0, 235, 255, 66, 70, 37, 68, 185, 48, 188, 200, 94, 228, 198, 235, 221, 140, 181, 144, 99, 248, 196, 90, 61, 135, 73, 240, 127, 1, 211, 104, 95, 54, 203, 189, 227, 154, 10, 61, 26, 20, 84, 209, 234, 180, 162, 59, 202, 113, 76, 193, 68, 89, 12, 88, 61, 181, 156, 32, 29, 81, 95, 99, 179, 43, 7, 193, 118, 104, 151, 124, 153, 54, 151, 132, 180, 83, 88, 120, 136, 149, 59, 142, 181, 221, 2, 61, 32, 42, 13 }, true, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmailAuthenticators_UserId",
@@ -291,7 +252,8 @@ namespace DataAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_SurveyId",
                 table: "Questions",
-                column: "SurveyId");
+                column: "SurveyId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_UserId",
@@ -313,19 +275,10 @@ namespace DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Answers");
-
-            migrationBuilder.DropTable(
                 name: "EmailAuthenticators");
 
             migrationBuilder.DropTable(
                 name: "OtpAuthenticators");
-
-            migrationBuilder.DropTable(
-                name: "RefreshTokens");
-
-            migrationBuilder.DropTable(
-                name: "UserOperationClaims");
 
             migrationBuilder.DropTable(
                 name: "Participations");
@@ -334,13 +287,19 @@ namespace DataAccess.Migrations
                 name: "Questions");
 
             migrationBuilder.DropTable(
+                name: "RefreshTokens");
+
+            migrationBuilder.DropTable(
+                name: "UserOperationClaims");
+
+            migrationBuilder.DropTable(
+                name: "Surveys");
+
+            migrationBuilder.DropTable(
                 name: "OperationClaims");
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Surveys");
         }
     }
 }

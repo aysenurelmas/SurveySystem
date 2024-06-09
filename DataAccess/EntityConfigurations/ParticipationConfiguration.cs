@@ -19,7 +19,6 @@ public class ParticipationConfiguration : IEntityTypeConfiguration<Participation
 
         builder.HasOne(p => p.Survey);
         builder.HasOne(p => p.User);
-        builder.HasMany(p => p.Answers);
         builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
     }
 }

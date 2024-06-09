@@ -24,7 +24,7 @@ public class BusinessMessages
     public const string? PasswordHaveToEqualToCheckPassword = "Yeni şifre ile ikinci şifre eşleşmiyor";
     public const string NewPasswordShouldBeDifferent = "Şifreniz son şifreyle anyı olamaz.";
     public const string PasswordDontMatch = "Yanlış E-posta veya şifre.";
-
+    public const string HasUserParticipatedAsync = "Kullanıcı bu ankete zaten katıldı.";
     public const string SurveyNotExists = "Anket bulunamadı";
 
 

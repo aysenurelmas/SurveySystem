@@ -265,8 +265,8 @@ namespace DataAccess.Migrations
                             Email = "admin@admin.com",
                             FirstName = "Admin",
                             LastName = "NArchitecture",
-                            PasswordHash = new byte[] { 113, 110, 234, 196, 192, 185, 115, 140, 212, 1, 8, 45, 197, 207, 172, 184, 69, 28, 142, 83, 182, 108, 132, 247, 141, 206, 17, 50, 36, 191, 138, 9, 108, 123, 23, 14, 11, 105, 147, 220, 49, 147, 27, 125, 235, 22, 221, 67, 34, 107, 91, 243, 95, 217, 144, 197, 145, 176, 11, 155, 161, 0, 61, 100 },
-                            PasswordSalt = new byte[] { 194, 187, 144, 180, 19, 205, 196, 84, 197, 2, 148, 150, 5, 100, 186, 119, 175, 96, 155, 205, 194, 94, 10, 22, 36, 250, 165, 166, 163, 65, 103, 1, 134, 138, 29, 174, 39, 178, 157, 115, 11, 77, 146, 255, 235, 180, 215, 65, 100, 175, 182, 15, 243, 23, 242, 64, 168, 158, 52, 47, 129, 169, 194, 107, 253, 89, 197, 52, 188, 232, 229, 228, 40, 159, 215, 119, 63, 172, 89, 226, 67, 238, 19, 219, 247, 207, 155, 117, 2, 116, 243, 209, 129, 158, 209, 106, 140, 18, 183, 140, 134, 122, 155, 77, 192, 221, 111, 181, 227, 80, 84, 117, 5, 139, 232, 205, 156, 15, 35, 56, 81, 169, 24, 121, 133, 50, 230, 175 },
+                            PasswordHash = new byte[] { 43, 250, 248, 68, 160, 81, 23, 209, 195, 135, 186, 203, 143, 11, 75, 247, 35, 216, 186, 214, 204, 85, 60, 192, 145, 220, 169, 191, 89, 174, 240, 109, 131, 196, 200, 158, 192, 84, 215, 166, 214, 144, 192, 209, 190, 210, 250, 169, 206, 209, 136, 172, 35, 229, 95, 127, 159, 122, 12, 95, 188, 228, 155, 217 },
+                            PasswordSalt = new byte[] { 239, 151, 108, 10, 76, 71, 230, 43, 87, 61, 90, 205, 13, 53, 205, 120, 161, 208, 6, 155, 90, 21, 93, 248, 108, 248, 38, 155, 54, 111, 187, 218, 40, 39, 157, 201, 69, 242, 0, 235, 255, 66, 70, 37, 68, 185, 48, 188, 200, 94, 228, 198, 235, 221, 140, 181, 144, 99, 248, 196, 90, 61, 135, 73, 240, 127, 1, 211, 104, 95, 54, 203, 189, 227, 154, 10, 61, 26, 20, 84, 209, 234, 180, 162, 59, 202, 113, 76, 193, 68, 89, 12, 88, 61, 181, 156, 32, 29, 81, 95, 99, 179, 43, 7, 193, 118, 104, 151, 124, 153, 54, 151, 132, 180, 83, 88, 120, 136, 149, 59, 142, 181, 221, 2, 61, 32, 42, 13 },
                             Status = true
                         });
                 });
@@ -309,49 +309,6 @@ namespace DataAccess.Migrations
                     b.ToTable("UserOperationClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Concretes.Answer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("Id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AnswerText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("AnswerText");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreatedDate");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletedDate");
-
-                    b.Property<int>("ParticipationId")
-                        .HasColumnType("int")
-                        .HasColumnName("ParticipationId");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int")
-                        .HasColumnName("QuestionId");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("UpdatedDate");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParticipationId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("Answers", (string)null);
-                });
-
             modelBuilder.Entity("Entities.Concretes.Participation", b =>
                 {
                     b.Property<int>("Id")
@@ -360,6 +317,10 @@ namespace DataAccess.Migrations
                         .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -422,7 +383,8 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SurveyId");
+                    b.HasIndex("SurveyId")
+                        .IsUnique();
 
                     b.ToTable("Questions", (string)null);
                 });
@@ -510,25 +472,6 @@ namespace DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Entities.Concretes.Answer", b =>
-                {
-                    b.HasOne("Entities.Concretes.Participation", "Participation")
-                        .WithMany("Answers")
-                        .HasForeignKey("ParticipationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Concretes.Question", "Question")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Participation");
-
-                    b.Navigation("Question");
-                });
-
             modelBuilder.Entity("Entities.Concretes.Participation", b =>
                 {
                     b.HasOne("Entities.Concretes.Survey", "Survey")
@@ -551,8 +494,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entities.Concretes.Question", b =>
                 {
                     b.HasOne("Entities.Concretes.Survey", "Survey")
-                        .WithMany("Questions")
-                        .HasForeignKey("SurveyId")
+                        .WithOne("Question")
+                        .HasForeignKey("Entities.Concretes.Question", "SurveyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -575,21 +518,12 @@ namespace DataAccess.Migrations
                     b.Navigation("UserOperationClaims");
                 });
 
-            modelBuilder.Entity("Entities.Concretes.Participation", b =>
-                {
-                    b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("Entities.Concretes.Question", b =>
-                {
-                    b.Navigation("Answers");
-                });
-
             modelBuilder.Entity("Entities.Concretes.Survey", b =>
                 {
                     b.Navigation("Participations");
 
-                    b.Navigation("Questions");
+                    b.Navigation("Question")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
