@@ -1,9 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Serilog.Logger;
 using Core.DataAccess.Security.JWT;
 using Core.Security.JWT;
-using Core.Security.OtpAuthenticator.OtpNet;
-using Core.Security.OtpAuthenticator;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 using Core.CrossCuttingConcerns.Serilog;
@@ -23,10 +20,6 @@ public static class CoreServiceRegistration
 
         services.AddTransient<LoggerServiceBase, FileLogger>();
         services.AddTransient<MsSqlLogger>();
-
-        services.AddScoped<IOtpAuthenticatorHelper, OtpNetOtpAuthenticatorHelper>();
-      //  services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
-
         return services;
     }
 }

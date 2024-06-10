@@ -3,6 +3,8 @@ using AutoMapper;
 using Azure.Core;
 using Business.Abstracts;
 using Business.Dtos;
+using Business.Messages;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using Core.DataAccess.Paging;
 using DataAccess.Abstracts;
 using Entities.Concretes;
@@ -84,7 +86,7 @@ public class SurveyManager : ISurveyService
         Survey? survey = await _surveyDal.GetAsync(include:s=>s.Include(s=>s.Question).Include(s=>s.Participations),
             predicate: s => s.Id == surveyId);
         if (survey == null)
-            throw new Exception("Anket bulunamadı");
+            await _surveyBusinessRules.SurveyShouldExistWhenSelected(survey);
         var response = _mapper.Map<SurveyResultResponse>(survey);
         return response;
     }

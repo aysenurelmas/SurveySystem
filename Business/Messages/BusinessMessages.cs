@@ -11,21 +11,14 @@ public class BusinessMessages
 
 
 
-    public static string ImageError = "Desteklenmeyen format";
-
-    public static string TCKNCouldNotBeVerified = "TC Kimlik numarası doğrulanamadı.";
 
     public static string CreateAccessTokenNot = "Token Oluşturulamadı.";
-    public const string RefreshDontExists = "Böyle bir token bulunamadı.";
-    public const string InvalidRefreshToken = "Geçersiz refresh token.";
-    public const string InvalidResetToken = "Geçersiz reset token.";
-
 
     public const string? PasswordHaveToEqualToCheckPassword = "Yeni şifre ile ikinci şifre eşleşmiyor";
     public const string NewPasswordShouldBeDifferent = "Şifreniz son şifreyle anyı olamaz.";
     public const string PasswordDontMatch = "Yanlış E-posta veya şifre.";
     public const string HasUserParticipatedAsync = "Kullanıcı bu ankete zaten katıldı.";
-    public const string SurveyNotExists = "Anket bulunamadı";
+    public const string SurveyNotFound = "Anket bulunamadı";
 
 
 }

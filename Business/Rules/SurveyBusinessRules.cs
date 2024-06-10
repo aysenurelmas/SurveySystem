@@ -19,7 +19,7 @@ public class SurveyBusinessRules : BaseBusinessRules
     public async Task SurveyShouldExistWhenSelected(Survey? survey)
     {
         if (survey == null)
-             throw new BusinessException(BusinessMessages.SurveyNotExists);
+             throw new BusinessException(BusinessMessages.SurveyNotFound);
     }
 
     public async Task SurveyIdShouldExistWhenSelected(int id)
